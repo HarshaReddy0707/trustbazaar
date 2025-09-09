@@ -1,4 +1,4 @@
-package com.trustbazaar.config;
+package com.trusrbazaar.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,7 +14,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = "com.trustbazaar")
+@ComponentScan(basePackages = "com.trusrbazaar") // Corrected package name
 public class AppConfig {
 
     @Bean
@@ -22,8 +22,9 @@ public class AppConfig {
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("org.postgresql.Driver");
         ds.setUrl("jdbc:postgresql://localhost:5432/postgres");
-    	ds.setUsername("postgres");
-    	ds.setPassword("HarshaReddy@0707");
+        ds.setUsername("postgres");
+        // For production, use environment variables or a properties file instead of hardcoding.
+        ds.setPassword("HarshaReddy@0707");
         return ds;
     }
 
@@ -31,7 +32,7 @@ public class AppConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource());
-        emf.setPackagesToScan("com.trustbazaar.model");
+        emf.setPackagesToScan("com.trusrbazaar.model"); // Corrected package name
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties props = new Properties();

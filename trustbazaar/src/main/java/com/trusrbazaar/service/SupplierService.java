@@ -15,11 +15,13 @@ public class SupplierService {
     }
 
     public Supplier register(Supplier supplier) {
+        
         return repo.save(supplier);
     }
 
     public Supplier login(String email, String password) {
         Supplier s = repo.findByEmail(email);
+        
         if (s != null && s.getPassword().equals(password)) {
             return s;
         }
