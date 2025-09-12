@@ -3,15 +3,13 @@
 <head>
     <title>Supplier Dashboard</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; }
-        header { background: #0066cc; padding: 15px; color: #fff; text-align: center; }
-        nav { background: #004d99; padding: 10px; text-align: center; }
-        nav a { margin: 0 15px; color: #fff; text-decoration: none; }
-        nav a:hover { text-decoration: underline; }
-        .container { padding: 20px; }
-        .card { background: #fff; border-radius: 10px; padding: 20px;
-                margin-bottom: 20px; box-shadow: 0 0 10px #ccc; }
-    </style>
+    body {
+      background: linear-gradient(to right, #ff6a00, #ee0979);
+      background-size: cover;
+      background-repeat: no-repeat;
+      font-family: 'Segoe UI', sans-serif;
+    }
+  </style>
 </head>
 <body>
 <header>

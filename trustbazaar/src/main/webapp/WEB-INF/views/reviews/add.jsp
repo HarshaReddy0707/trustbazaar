@@ -18,7 +18,7 @@
 <body>
 <div class="form-box">
     <h2>Write a Review</h2>
-    <form action="/reviews/add" method="post">
+    <form action="/reviews" method="post">
         <label for="supplier">Select Supplier</label>
         <select name="supplierId" required>
             <option value="">--Choose Supplier--</option>

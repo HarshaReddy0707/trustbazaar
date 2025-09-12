@@ -3,6 +3,8 @@ package com.trusrbazaar.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+// Import this
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -14,7 +16,8 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = "com.trusrbazaar") // Corrected package name
+@EnableJpaRepositories(basePackages = "com.trusrbazaar.repository")
+@ComponentScan(basePackages = "com.trusrbazaar")
 public class AppConfig {
 
     @Bean
@@ -23,7 +26,6 @@ public class AppConfig {
         ds.setDriverClassName("org.postgresql.Driver");
         ds.setUrl("jdbc:postgresql://localhost:5432/postgres");
         ds.setUsername("postgres");
-        // For production, use environment variables or a properties file instead of hardcoding.
         ds.setPassword("HarshaReddy@0707");
         return ds;
     }
@@ -32,7 +34,7 @@ public class AppConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource());
-        emf.setPackagesToScan("com.trusrbazaar.model"); // Corrected package name
+        emf.setPackagesToScan("com.trusrbazaar.model");
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties props = new Properties();

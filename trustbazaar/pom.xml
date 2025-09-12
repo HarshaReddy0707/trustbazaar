@@ -75,11 +75,6 @@
             <version>42.7.3</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-        	<groupId>OnlineBanking</groupId>
-        	<artifactId>Banking</artifactId>
-        	<version>0.0.1-SNAPSHOT</version>
-        </dependency>
      </dependencies>
    <build>
     <finalName>trustbazaar</finalName>
