@@ -17,12 +17,13 @@
 <body>
 <div class="login-box">
     <h2>Supplier Login</h2>
-    <form action="/supplier/login" method="post">
+    <form action="${pageContext.request.contextPath}/supplier/login" method="post">
         <input type="email" name="email" placeholder="Email" required/>
         <input type="password" name="password" placeholder="Password" required/>
         <button type="submit">Login</button>
     </form>
-    <a href="register.jsp">New Supplier? Register</a>
+    <%-- This link is now corrected to use the application's context path --%>
+    <a href="${pageContext.request.contextPath}/supplier/register">New Supplier? Register</a>
 </div>
 </body>
 </html>

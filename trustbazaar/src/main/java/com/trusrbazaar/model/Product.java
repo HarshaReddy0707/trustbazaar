@@ -11,11 +11,16 @@ public class Product {
     private String name;
     private Double price;
     private String category;
+    
+    // Add this new field
+    private String imageUrl;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
+	// Getters and Setters for all fields, including the new imageUrl
+	
 	public Long getId() {
 		return id;
 	}
@@ -47,6 +52,14 @@ public class Product {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+    
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
 	public Supplier getSupplier() {
 		return supplier;
@@ -55,7 +68,4 @@ public class Product {
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
 	}
-
-    
-    
 }

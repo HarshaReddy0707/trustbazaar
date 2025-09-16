@@ -1,67 +1,70 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
-    <title>Product List</title>
+    <title>Browse Products - TrustBazaar</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; background: #f8f9fa; }
-        .container { max-width: 900px; margin: 40px auto; }
-        h2 { text-align: center; margin-bottom: 20px; color: #0066cc; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
-        th { background: #0066cc; color: #fff; }
-        tr:nth-child(even) { background: #f2f2f2; }
-        .btn { padding: 8px 15px; background: #0066cc; color: #fff;
-               text-decoration: none; border-radius: 6px; }
-        .btn:hover { background: #004d99; }
-        .top-actions { display: flex; justify-content: space-between; align-items: center; }
-        .search-box input { padding: 8px; width: 200px; border-radius: 6px; border: 1px solid #ccc; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
     </style>
 </head>
-<body>
-<div class="container">
-    <div class="top-actions">
-        <h2>All Products</h2>
-        <div class="search-box">
-            <form action="/product/search" method="get">
-                <input type="text" name="keyword" placeholder="Search product..."/>
-                <button type="submit" class="btn">Search</button>
-            </form>
+<body class="bg-gray-100">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="/" class="text-2xl font-bold text-blue-600">🛒 TrustBazaar</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/product/list" class="bg-blue-100 text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Browse Products</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <a href="add.jsp" class="btn">+ Add Product</a>
+    </nav>
+
+    <div class="container mx-auto mt-10 px-6">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Our Products</h1>
+            <a href="/product/add" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300">
+                + Add New Product
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <c:forEach var="product" items="${products}">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="${not empty product.imageUrl ? product.imageUrl : 'https://via.placeholder.com/300'}" alt="${product.name}" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">${product.name}</h3>
+                        <p class="text-sm text-gray-500 mb-2">${product.category}</p>
+                        <div class="flex items-center justify-between">
+                            <p class="text-xl font-bold text-blue-600">
+                                <fmt:formatNumber value="${product.price}" type="currency" currencySymbol="₹"/>
+                            </p>
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+         <c:if test="${empty products}">
+             <div class="text-center py-20">
+                <p class="text-xl text-gray-500">No products found at the moment.</p>
+            </div>
+        </c:if>
     </div>
 
-    <table>
-        <tr>
-            <th>Product</th>
-            <th>Category</th>
-            <th>Price (₹)</th>
-            <th>Supplier</th>
-            <th>Actions</th>
-        </tr>
+    <footer class="bg-gray-800 text-white text-center p-6 mt-12">
+        <p>&copy; 2025 TrustBazaar | All Rights Reserved</p>
+    </footer>
 
-        <!-- Example static rows (Replace with JSTL loop in Spring MVC) -->
-        <tr>
-            <td>Rice</td>
-            <td>Grains</td>
-            <td>50</td>
-            <td>Supplier A</td>
-            <td>
-                <a href="add.jsp" class="btn">Edit</a>
-                <a href="/product/delete/1" class="btn">Delete</a>
-            </td>
-        </tr>
-        <tr>
-            <td>Sunflower Oil</td>
-            <td>Oils</td>
-            <td>120</td>
-            <td>Supplier B</td>
-            <td>
-                <a href="add.jsp" class="btn">Edit</a>
-                <a href="/product/delete/2" class="btn">Delete</a>
-            </td>
-        </tr>
-
-    </table>
-</div>
 </body>
 </html>
